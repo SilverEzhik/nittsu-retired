@@ -1,0 +1,8 @@
+#source this by ". setenv", baka.
+#TODO: make this part not so damn flimsy and dependent on putting the target toolchain one level above where the nittsu files are
+
+export PREFIX="$PWD/../opt/cross" #It'd be nice to keep all these things in one place for now
+export TARGET=i686-elf
+export PATH="$PREFIX/bin:$PATH"
+export SHELLMODE="osdev"
+

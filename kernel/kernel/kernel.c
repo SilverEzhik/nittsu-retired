@@ -1,11 +1,42 @@
 #include <stdio.h>
+#include <nonstandard.h>
 #include <kernel/tty.h>
+#include <arch/i386/init.h>
+#include <stdint.h>
+
+void print_mem(char * string) {
+    char memstr[255];
+    terminal_writestring("String at 0x");
+    terminal_writestring(itoa((int)string, memstr, 16));
+    terminal_writestring(": ");
+    terminal_writestring(string);
+    terminal_writestring("\n");
+}
 
 void kernel_main(void) {
     // initialize terminal
     terminal_initialize();
-    terminal_writestring("1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36");
-    char aaa[] = "0x0000";
     //very_bad_u16toa(aaa, *(terminal_buffer+14));
-    terminal_writestring(aaa);
+    terminal_writestring("welcome i guess\n\n");
+
+    char * w;
+    w = (char *)0xBBBB;
+    w[0] = 'a';
+    w[1] = 'w';
+    w[2] = 'a';
+    w[3] = 'w';
+    w[4] = '\0';
+    terminal_writestring("printing w: ");
+    terminal_writestring((char *)0xBBBB);
+    terminal_writestring("\n");
+    print_mem((char *) 0xBBBB);
+
+    init_descriptor_tables();
+    
+    print_mem((char *) 0xBBBB);
+
+    
+    itoa(10/0, w, 10);
 }
+
+
